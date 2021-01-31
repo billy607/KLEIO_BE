@@ -10,11 +10,11 @@ import java.util.UUID;
 @Getter
 @Setter
 @AllArgsConstructor
-public class Person {
+public class User {
 
     @JsonProperty("id")
-    private final UUID id;
+    private UUID id;
 
     @JsonProperty("name")
-    private final String name;
+    private String name;
 }
