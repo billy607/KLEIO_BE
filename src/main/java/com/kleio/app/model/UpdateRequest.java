@@ -5,16 +5,17 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.UUID;
-
 @Getter
 @Setter
 @AllArgsConstructor
-public class User {
+public class UpdateRequest {
 
-    @JsonProperty("id")
-    private UUID id;
+    @JsonProperty("userId")
+    private int userId;
 
     @JsonProperty("name")
     private String name;
+
+    @JsonProperty("password")
+    private String password;
 }
