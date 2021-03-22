@@ -1,0 +1,9 @@
+version: '3'
+
+services:
+  kleio:
+    image: kleio:0.0.3-SNAPSHOT
+    volumes:
+      - /opt/kleio/app/logs/:/logs
+    ports:
+      - "80:9091"
