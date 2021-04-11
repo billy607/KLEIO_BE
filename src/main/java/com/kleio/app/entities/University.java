@@ -4,7 +4,15 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import java.util.List;
 
 @Entity
 @Table(name = "University")
@@ -15,44 +23,53 @@ public class University {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "universityId")
-    public int universityId;
+    private int universityId;
 
     @Column(name = "name")
-    public String name;
+    private String name;
 
     @Column(name = "longitude")
-    public Long longitude;
+    private Long longitude;
 
     @Column(name = "latitude")
-    public Long latitude;
+    private Long latitude;
 
     @Column(name = "city")
-    public String city;
+    private String city;
 
     @Column(name = "state")
-    public String state;
+    private String state;
 
     @Column(name = "stateId")
-    public int stateId;
+    private int stateId;
 
     @Column(name = "country")
-    public String country;
+    private String country;
 
     @Column(name = "countryId")
-    public int countryId;
+    private int countryId;
 
     @Column(name = "overview")
-    public String overview;
+    private String overview;
 
     @Column(name = "description")
-    public String description;
+    private String description;
 
     @Column(name = "ranking")
-    public String ranking;
+    private String ranking;
 
     @Column(name = "acceptance")
-    public String acceptance;
+    private String acceptance;
 
     @Column(name = "colleges")
-    public String colleges;
+    private String colleges;
+
+    @OneToMany(mappedBy = "University")
+    private List<Colleges> collegesList;
+
+    @OneToMany(mappedBy = "University")
+    private List<Poi> pois;
+
+    @OneToMany(mappedBy = "University")
+    private List<UserReport> userReports;
 }

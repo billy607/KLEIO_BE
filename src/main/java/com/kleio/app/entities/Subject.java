@@ -4,7 +4,16 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "Subject")
@@ -15,14 +24,18 @@ public class Subject {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "SubjectId")
-    public int SubjectId;
+    private int SubjectId;
 
     @Column(name = "collegeId")
-    public int collegeId;
+    private int collegeId;
 
     @Column(name = "subjectName")
-    public String subjectName;
+    private String subjectName;
 
     @Column(name = "subjectDetail")
-    public String subjectDetail;
+    private String subjectDetail;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="collegeId")
+    private Colleges college;
 }

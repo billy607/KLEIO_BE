@@ -4,7 +4,17 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import java.util.List;
 
 @Entity
 @Table(name = "Poi")
@@ -15,29 +25,36 @@ public class Poi {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "poiId")
-    public int poiId;
+    private int poiId;
 
     @Column(name = "universityId")
-    public int universityId;
+    private int universityId;
 
     @Column(name = "longitude")
-    public Long longitude;
+    private Long longitude;
 
     @Column(name = "latitude")
-    public Long latitude;
+    private Long latitude;
 
     @Column(name = "name")
-    public String name;
+    private String name;
 
     @Column(name = "audio")
-    public int audio;
+    private int audio;
 
     @Column(name = "image")
-    public int image;
+    private int image;
 
     @Column(name = "reportTemplate")
-    public String reportTemplate;
+    private String reportTemplate;
 
     @Column(name = "premadeTourNumber")
-    public int premadeTourNumber;
+    private int premadeTourNumber;
+
+    @ManyToOne
+    @JoinColumn(name="universityId")
+    private University university;
+
+    @OneToMany(mappedBy = "Poi")
+    private List<Note> notes;
 }
