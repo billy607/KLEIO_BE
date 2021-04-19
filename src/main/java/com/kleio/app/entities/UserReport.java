@@ -41,14 +41,12 @@ public class UserReport {
     private int rating;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="userId")
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="universityId")
     private University university;
 
-    @OneToMany(mappedBy = "UserReport")
+    @OneToMany(mappedBy = "userReport", targetEntity = Note.class, fetch = FetchType.LAZY)
     private List<Note> notes;
 
     @OneToMany(cascade = CascadeType.ALL)

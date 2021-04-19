@@ -7,6 +7,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -52,9 +53,8 @@ public class Poi {
     private int premadeTourNumber;
 
     @ManyToOne
-    @JoinColumn(name="universityId")
     private University university;
 
-    @OneToMany(mappedBy = "Poi")
+    @OneToMany(mappedBy = "poi", targetEntity = Note.class, fetch = FetchType.LAZY)
     private List<Note> notes;
 }

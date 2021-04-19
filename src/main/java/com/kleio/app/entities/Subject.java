@@ -36,6 +36,5 @@ public class Subject {
     private String subjectDetail;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="collegeId")
     private Colleges college;
 }

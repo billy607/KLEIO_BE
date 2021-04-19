@@ -1,9 +1,10 @@
-package com.kleio.app.service;
+package com.kleio.app.service.Impl;
 
 import com.kleio.app.dao.UserRepository;
 import com.kleio.app.entities.User;
-import com.kleio.app.model.UpdateRequest;
-import com.kleio.app.model.UserRequestTest;
+import com.kleio.app.dto.UpdateRequest;
+import com.kleio.app.dto.UserRequestTest;
+import com.kleio.app.service.userService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,11 +15,12 @@ import java.util.List;
 @Service
 @Transactional
 @AllArgsConstructor
-public class UserService {
+public class UserServiceImpl implements userService {
 
     @Autowired
     private final UserRepository userRepository;
 
+    @Override
     public boolean addUser(UserRequestTest userRequestTest) {
         try {
             userRepository.save(convertToUser(userRequestTest));
@@ -28,14 +30,17 @@ public class UserService {
         return true;
     }
 
+    @Override
     public List<User> getAllUser() {
         return userRepository.findAll();
     }
 
+    @Override
     public User getUser(int userId) {
         return userRepository.getByUserId(userId);
     }
 
+    @Override
     public boolean deleteUser(int userId) {
         try {
             userRepository.deleteByUserId(userId);
@@ -46,6 +51,7 @@ public class UserService {
         return true;
     }
 
+    @Override
     public User updateUser(UpdateRequest updateRequest) {
         userRepository.updateByUserId(updateRequest.getUserId(), updateRequest.getName(), updateRequest.getPassword());
         return userRepository.getByUserId(updateRequest.getUserId());

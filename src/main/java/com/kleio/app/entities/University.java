@@ -7,6 +7,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -64,12 +65,12 @@ public class University {
     @Column(name = "colleges")
     private String colleges;
 
-    @OneToMany(mappedBy = "University")
+    @OneToMany(mappedBy = "university", targetEntity = Colleges.class, fetch = FetchType.LAZY)
     private List<Colleges> collegesList;
 
-    @OneToMany(mappedBy = "University")
+    @OneToMany(mappedBy = "university", targetEntity = Poi.class, fetch = FetchType.LAZY)
     private List<Poi> pois;
 
-    @OneToMany(mappedBy = "University")
+    @OneToMany(mappedBy = "university", targetEntity = UserReport.class, fetch = FetchType.LAZY)
     private List<UserReport> userReports;
 }

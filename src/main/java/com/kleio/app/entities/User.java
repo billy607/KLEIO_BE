@@ -8,6 +8,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -57,9 +58,9 @@ public class User {
             inverseJoinColumns = @JoinColumn(name="interestId"))
     private List<Interest> interests;
 
-    @OneToMany(mappedBy = "User")
+    @OneToMany(mappedBy = "user", targetEntity = Note.class, fetch = FetchType.LAZY)
     private List<Note> notes;
 
-    @OneToMany(mappedBy = "UserReport")
+    @OneToMany(mappedBy = "user", targetEntity = UserReport.class, fetch = FetchType.LAZY)
     private List<UserReport> userReports;
 }

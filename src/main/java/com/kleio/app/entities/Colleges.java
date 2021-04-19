@@ -7,6 +7,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -46,9 +47,8 @@ public class Colleges {
     private String graduate;
 
     @ManyToOne
-    @JoinColumn(name = "universityId")
     private University university;
 
-    @OneToMany(mappedBy = "Colleges")
+    @OneToMany(mappedBy = "college", targetEntity = Subject.class, fetch = FetchType.LAZY)
     private List<Subject> subjects;
 }

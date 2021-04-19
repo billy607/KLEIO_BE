@@ -1,4 +1,4 @@
-package com.kleio.app.model;
+package com.kleio.app.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
