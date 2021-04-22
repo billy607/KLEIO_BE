@@ -2,6 +2,7 @@ package com.kleio.app.service.Impl;
 
 import com.amazonaws.AmazonClientException;
 import com.amazonaws.AmazonServiceException;
+import com.amazonaws.Response;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.GetObjectRequest;
@@ -13,6 +14,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
@@ -59,6 +65,32 @@ public class s3ServiceImpl implements s3Service {
             logger.info("IOE Error Message: " + ioe.getMessage());
         }
         return result;
+    }
+
+    public ResponseEntity<Resource> downloadAudio(String keyName) {
+        S3Object s3object = null;
+        try {
+            System.out.println("Downloading an object.");
+            s3object = s3client.getObject(new GetObjectRequest(bucketName, keyName));
+            System.out.println("Content-Type: " + s3object.getObjectMetadata().getContentType());
+            logger.info("===================== Import File - Done! =====================");
+
+        } catch (AmazonServiceException ase) {
+            logger.info("Caught an AmazonServiceException from GET requests, rejected reasons:");
+            logger.info("Error Message:    " + ase.getMessage());
+            logger.info("HTTP Status Code: " + ase.getStatusCode());
+            logger.info("AWS Error Code:   " + ase.getErrorCode());
+            logger.info("Error Type:       " + ase.getErrorType());
+            logger.info("Request ID:       " + ase.getRequestId());
+        } catch (AmazonClientException ace) {
+            logger.info("Caught an AmazonClientException: ");
+            logger.info("Error Message: " + ace.getMessage());
+        }
+        assert s3object != null;
+        return ResponseEntity.ok()
+                .contentType(MediaType.valueOf(s3object.getObjectMetadata().getContentType()))
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + keyName + "\"")
+                .body(new InputStreamResource(s3object.getObjectContent()));
     }
 
     @Override
