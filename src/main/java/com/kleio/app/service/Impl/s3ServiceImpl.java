@@ -2,7 +2,6 @@ package com.kleio.app.service.Impl;
 
 import com.amazonaws.AmazonClientException;
 import com.amazonaws.AmazonServiceException;
-import com.amazonaws.Response;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.GetObjectRequest;
@@ -67,7 +66,7 @@ public class s3ServiceImpl implements s3Service {
         return result;
     }
 
-    public ResponseEntity<Resource> downloadAudio(String keyName) {
+    public ResponseEntity<Resource> downloadFileByName(String keyName) throws Exception {
         S3Object s3object = null;
         try {
             System.out.println("Downloading an object.");
@@ -86,7 +85,9 @@ public class s3ServiceImpl implements s3Service {
             logger.info("Caught an AmazonClientException: ");
             logger.info("Error Message: " + ace.getMessage());
         }
-        assert s3object != null;
+        if (s3object == null) {
+            throw new Exception("file cannot be found");
+        }
         return ResponseEntity.ok()
                 .contentType(MediaType.valueOf(s3object.getObjectMetadata().getContentType()))
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + keyName + "\"")
