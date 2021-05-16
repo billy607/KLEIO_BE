@@ -48,11 +48,14 @@ public class Note {
     private int reportId;
 
     @ManyToOne
+    @JoinColumn(name = "userId", insertable = false, updatable = false)
     private User user;
 
     @ManyToOne
+    @JoinColumn(name = "userId", insertable = false, updatable = false)
     private UserReport userReport;
 
     @ManyToOne
+    @JoinColumn(name = "poiId", insertable = false, updatable = false)
     private Poi poi;
 }

@@ -53,6 +53,7 @@ public class Poi {
     private int premadeTourNumber;
 
     @ManyToOne
+    @JoinColumn(name = "universityId", insertable = false, updatable = false)
     private University university;
 
     @OneToMany(mappedBy = "poi", targetEntity = Note.class, fetch = FetchType.LAZY)

@@ -47,6 +47,7 @@ public class Colleges {
     private String graduate;
 
     @ManyToOne
+    @JoinColumn(name = "universityId", insertable = false, updatable = false)
     private University university;
 
     @OneToMany(mappedBy = "college", targetEntity = Subject.class, fetch = FetchType.LAZY)

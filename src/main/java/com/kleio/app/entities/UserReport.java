@@ -41,9 +41,11 @@ public class UserReport {
     private int rating;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "userId", insertable = false, updatable = false)
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "universityId", insertable = false, updatable = false)
     private University university;
 
     @OneToMany(mappedBy = "userReport", targetEntity = Note.class, fetch = FetchType.LAZY)
