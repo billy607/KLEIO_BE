@@ -1,10 +1,9 @@
-package com.kleio.app.api;
+package com.kleio.app.controller;
 
 import com.kleio.app.entities.User;
 import com.kleio.app.dto.UpdateRequest;
 import com.kleio.app.dto.UserRequestTest;
 import com.kleio.app.service.Impl.UserServiceImpl;
-import com.kleio.app.service.Impl.s3ServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -25,9 +24,6 @@ public class UserController {
 
     @Autowired
     private final UserServiceImpl userServiceImpl;
-
-    @Autowired
-    private final s3ServiceImpl s3;
 
     @PostMapping(path = "/add", name = "adding new user")
     public boolean addUser(@RequestBody UserRequestTest userRequestTest) {

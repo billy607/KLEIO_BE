@@ -7,15 +7,12 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import java.util.List;
 
 @Entity
 @Table(name = "Poi")
@@ -40,11 +37,11 @@ public class Poi {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "audio")
-    private int audio;
+    @Column(name = "audioId")
+    private int audioId;
 
-    @Column(name = "image")
-    private int image;
+    @Column(name = "imageId")
+    private int imageId;
 
     @Column(name = "reportTemplate")
     private String reportTemplate;
@@ -55,7 +52,4 @@ public class Poi {
     @ManyToOne
     @JoinColumn(name = "universityId", insertable = false, updatable = false)
     private University university;
-
-    @OneToMany(mappedBy = "poi", targetEntity = Note.class, fetch = FetchType.LAZY)
-    private List<Note> notes;
 }

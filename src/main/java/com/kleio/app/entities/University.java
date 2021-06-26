@@ -7,13 +7,10 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import java.util.List;
 
 @Entity
 @Table(name = "University")
@@ -50,27 +47,18 @@ public class University {
     @Column(name = "countryId")
     private int countryId;
 
-    @Column(name = "overview")
-    private String overview;
+    @Column(name = "overviewInfo")
+    private String overviewInfo;
 
-    @Column(name = "description")
-    private String description;
+    @Column(name = "descriptionInfo")
+    private String descriptionInfo;
 
-    @Column(name = "ranking")
-    private String ranking;
+    @Column(name = "rankingInfo")
+    private String rankingInfo;
 
-    @Column(name = "acceptance")
-    private String acceptance;
+    @Column(name = "acceptanceInfo")
+    private String acceptanceInfo;
 
-    @Column(name = "colleges")
-    private String colleges;
-
-    @OneToMany(mappedBy = "university", targetEntity = Colleges.class, fetch = FetchType.LAZY)
-    private List<Colleges> collegesList;
-
-    @OneToMany(mappedBy = "university", targetEntity = Poi.class, fetch = FetchType.LAZY)
-    private List<Poi> pois;
-
-    @OneToMany(mappedBy = "university", targetEntity = UserReport.class, fetch = FetchType.LAZY)
-    private List<UserReport> userReports;
+    @Column(name = "collegesInfo")
+    private String collegesInfo;
 }

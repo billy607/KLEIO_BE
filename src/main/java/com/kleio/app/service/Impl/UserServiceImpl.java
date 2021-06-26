@@ -1,6 +1,6 @@
 package com.kleio.app.service.Impl;
 
-import com.kleio.app.dao.UserRepository;
+import com.kleio.app.repository.UserRepository;
 import com.kleio.app.entities.User;
 import com.kleio.app.dto.UpdateRequest;
 import com.kleio.app.dto.UserRequestTest;

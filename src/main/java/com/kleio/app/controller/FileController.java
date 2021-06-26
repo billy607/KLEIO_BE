@@ -1,4 +1,4 @@
-package com.kleio.app.api;
+package com.kleio.app.controller;
 
 import com.kleio.app.service.Impl.s3ServiceImpl;
 import lombok.AllArgsConstructor;
