@@ -29,10 +29,10 @@ public class Poi {
     private int universityId;
 
     @Column(name = "longitude")
-    private Long longitude;
+    private double longitude;
 
     @Column(name = "latitude")
-    private Long latitude;
+    private double latitude;
 
     @Column(name = "name")
     private String name;

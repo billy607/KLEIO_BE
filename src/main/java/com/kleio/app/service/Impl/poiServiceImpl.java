@@ -19,7 +19,7 @@ public class poiServiceImpl implements poiService {
     private final PoiRepository poiRepository;
 
     @Override
-    public List<Poi> getPoiByUniversityId(int universityId) {
+    public List<Poi> getPoiByUniversityId(final int universityId) {
         return poiRepository.getByUniversityId(universityId);
     }
 }
