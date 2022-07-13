@@ -1,9 +1,9 @@
 package com.kleio.app.controller;
 
+import com.kleio.app.dto.UserRequest;
 import com.kleio.app.entities.User;
 import com.kleio.app.dto.UpdateRequest;
-import com.kleio.app.dto.UserRequestTest;
-import com.kleio.app.service.Impl.UserServiceImpl;
+import com.kleio.app.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -23,31 +23,36 @@ import java.util.List;
 public class UserController {
 
     @Autowired
-    private final UserServiceImpl userServiceImpl;
+    private final UserService userService;
 
     @PostMapping(path = "/add", name = "adding new user")
-    public boolean addUser(@RequestBody UserRequestTest userRequestTest) {
-        return userServiceImpl.addUser(userRequestTest);
+    public boolean addUser(@RequestBody UserRequest userRequest) {
+        return userService.addUser(userRequest);
     }
 
     @GetMapping(path ="/getAllUser", name = "get all user")
     public List<User> getAllUser() {
-        return userServiceImpl.getAllUser();
+        return userService.getAllUser();
     }
 
     @GetMapping(path = "/{userId}")
     public User getUser(@PathVariable("userId") int userId) {
-        return userServiceImpl.getUser(userId);
+        return userService.getUser(userId);
     }
 
     @DeleteMapping(path = "/{userId}")
     public boolean deleteUser(@PathVariable("userId") int userId) {
-        return userServiceImpl.deleteUser(userId);
+        return userService.deleteUser(userId);
     }
 
     @PostMapping(path = "/update", name = "update current user")
     public User updateUser(@RequestBody UpdateRequest updateRequest) {
-        return userServiceImpl.updateUser(updateRequest);
+        return userService.updateUser(updateRequest);
+    }
+
+    @PostMapping(path = "/login", name = "login to app")
+    public boolean login(@RequestBody UserRequest userRequest) {
+        return userService.userLogin(userRequest);
     }
 
 }

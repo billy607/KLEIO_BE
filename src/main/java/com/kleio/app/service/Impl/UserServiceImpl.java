@@ -3,27 +3,28 @@ package com.kleio.app.service.Impl;
 import com.kleio.app.repository.UserRepository;
 import com.kleio.app.entities.User;
 import com.kleio.app.dto.UpdateRequest;
-import com.kleio.app.dto.UserRequestTest;
-import com.kleio.app.service.userService;
+import com.kleio.app.dto.UserRequest;
+import com.kleio.app.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @Transactional
 @AllArgsConstructor
-public class UserServiceImpl implements userService {
+public class UserServiceImpl implements UserService {
 
     @Autowired
     private final UserRepository userRepository;
 
     @Override
-    public boolean addUser(UserRequestTest userRequestTest) {
+    public boolean addUser(UserRequest userRequest) {
         try {
-            userRepository.save(convertToUser(userRequestTest));
+            userRepository.save(convertToUser(userRequest));
         } catch (Exception e) {
             return false;
         }
@@ -57,10 +58,15 @@ public class UserServiceImpl implements userService {
         return userRepository.getByUserId(updateRequest.getUserId());
     }
 
-    private User convertToUser(UserRequestTest userRequestTest) {
+    @Override
+    public boolean userLogin(UserRequest userRequest) {
+        return Objects.nonNull(userRepository.getIdByNameAndPwd(userRequest.getName(), userRequest.getPassword()));
+    }
+
+    private User convertToUser(UserRequest userRequest) {
         User user = new User();
-        user.setUserName(userRequestTest.getName());
-        user.setPassword(userRequestTest.getPassword());
+        user.setUserName(userRequest.getName());
+        user.setPassword(userRequest.getPassword());
         return user;
     }
 }

@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 public interface UserRepository extends JpaRepository<User, Integer> {
 
     @Modifying
-    @Query("DELETE FROM User u where u.userId = :userId")
+    @Query("DELETE FROM User u WHERE u.userId = :userId")
     void deleteByUserId(@Param("userId") int userId);
 
     User getByUserId(int userId);
@@ -19,4 +19,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     @Modifying
     @Query("UPDATE User u SET u.userName = :userName, u.password = :password where u.userId = :userId")
     void updateByUserId(@Param("userId")int userId, @Param("userName")String name, @Param("password")String password);
+
+    @Query("SELECT u.userId FROM User u WHERE u.userName = :name AND u.password = :pwd")
+    Object getIdByNameAndPwd(@Param("name") String name, @Param("pwd") String password);
 }

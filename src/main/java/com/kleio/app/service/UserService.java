@@ -1,13 +1,13 @@
 package com.kleio.app.service;
 
 import com.kleio.app.dto.UpdateRequest;
-import com.kleio.app.dto.UserRequestTest;
+import com.kleio.app.dto.UserRequest;
 import com.kleio.app.entities.User;
 
 import java.util.List;
 
-public interface userService {
-    boolean addUser(UserRequestTest userRequestTest);
+public interface UserService {
+    boolean addUser(UserRequest userRequest);
 
     List<User> getAllUser();
 
@@ -16,4 +16,6 @@ public interface userService {
     boolean deleteUser(int userId);
 
     User updateUser(UpdateRequest updateRequest);
+
+    boolean userLogin(UserRequest userRequest);
 }
